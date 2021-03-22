@@ -1,0 +1,48 @@
+#include<iostream>
+#include<ctime>
+#include<stdlib.h>
+using namespace std;
+void sapxep(int* a,int n){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(*(a+i)>*(a+j)){
+                int m=*(a+i);
+                *(a+i)=*(a+j);
+                *(a+j)=m;
+            }
+        }
+    }
+}
+void input(int* a,int n){
+    srand(time(NULL));
+    for(int i=0;i<n;i++){
+        *(a+i)=rand()%10;
+    }
+}
+int  timKiemNhiPhan(int* a,int n,int k){
+    int x=n/2;
+    while(*(a+x)!=k){
+        if(*(a+x)>k){
+            x=(x+n)/2;
+        }
+        if(*(a+x)<k){
+            x=x/2;
+        }
+    }
+     return x;
+}
+int main(){
+    int n;
+    cin >>n;
+    int* a=new int[n];
+    input(a,n);
+    sapxep(a,n);
+    for(int i=0;i<n;i++){
+        cout <<*(a+i)<<" ";
+    }
+    int k=a[rand()%n];
+    cout <<endl<<k<<endl;
+    cout<< timKiemNhiPhan(a,n,k);
+    delete []a;
+    return 0;
+}
